@@ -1,5 +1,5 @@
-# Créateur de Tâches HTTP pour Google Cloud Task
+# HTTP Task Creator for Google Cloud Tasks
 
-Ce module permet de transformer automatiquement les messages reçus via Google Cloud Pub/Sub en tâches HTTP pour Google Cloud Tasks.  
+This module automatically converts messages received via Google Cloud Pub/Sub into HTTP tasks for Google Cloud Tasks.  
 
-Lorsqu'un message est publié sur un sujet spécifique de Cloud Pub/Sub, notre fonction est déclenchée. Cette fonction prend le message, le traite, et crée une tâche HTTP correspondante dans Google Cloud Tasks  
+When a message is published on a specific Cloud Pub/Sub topic, our function is triggered. This function takes the message, processes it, and creates a corresponding HTTP task in Google Cloud Tasks.
