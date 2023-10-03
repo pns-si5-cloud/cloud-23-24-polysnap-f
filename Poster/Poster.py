@@ -10,7 +10,7 @@ app = Flask(__name__)
 load_dotenv()
 
 def send_post_request(message, idSender, idReceiver):
-    conn = http.client.HTTPConnection("localhost", 3000)
+    conn = http.client.HTTPSConnection("app-7b3a3c98-565a-4b75-9e80-683f4e59b229.cleverapps.io", port=443)
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     payload = urllib.parse.urlencode(
         {"msg": message, "idSender": idSender, "idReceiver": idReceiver}
