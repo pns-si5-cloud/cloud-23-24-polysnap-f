@@ -13,7 +13,6 @@ export class AppController {
   @Post()
   @HttpCode(200)
   postStatus(@Body() body: {idSender: string, idReceiver: string, msg: string}) {
-    console.log("New message sent by '"+ body.idSender+ "' for '"+ body.idReceiver+ "'")
-    console.log("Message : ", body.msg);
+    return this.appService.postStatus(body);
   }
 }

@@ -23,8 +23,8 @@ def send_post_request(message, idSender, idReceiver):
 def index():
     if request.method == "POST":
         message = request.form.get("message")
-        idSender = "123"
-        idReceiver = "456"
+        idSender = request.form.get("expediteur")
+        idReceiver = request.form.get("destinataire")
         json_data = {"idSender": idSender, "idReceiver": idReceiver, "message": message}
         print(json_data)
 
