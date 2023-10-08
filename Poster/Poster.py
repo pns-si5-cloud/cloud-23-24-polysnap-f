@@ -4,10 +4,8 @@ import urllib.parse
 import json
 import pymongo
 import os
-from dotenv import load_dotenv
 
 app = Flask(__name__)
-load_dotenv()
 
 def send_post_request(message, idSender, idReceiver):
     conn = http.client.HTTPSConnection("app-7b3a3c98-565a-4b75-9e80-683f4e59b229.cleverapps.io", port=443)
@@ -75,6 +73,14 @@ def index():
 
     return render_template("form.html")
 
+@app.route("/messages", methods=["POST"])
+def store_message():
+    json_data = request.json
+    if not json_data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    store_data_base(json_data)
+    return jsonify({"message": "Data stored successfully"}), 201
 
 if __name__ == "__main__":
     app.run(port=5000)
