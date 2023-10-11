@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, jsonify
-from services.database_service import store_data_base
-from services.post_service import send_post_request
+from services import store_data_base
+from services import send_post_request
 
-routes = Blueprint('routes', __name__)
+main_routes = Blueprint('routes', __name__)
 
-@routes.route("/", methods=["GET", "POST"])
+@main_routes.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         message = request.form.get("message")
@@ -22,7 +22,7 @@ def index():
 
     return render_template("form.html")
 
-@routes.route("/messages", methods=["POST"])
+@main_routes.route("/messages", methods=["POST"])
 def store_message():
     json_data = request.json
     if not json_data:

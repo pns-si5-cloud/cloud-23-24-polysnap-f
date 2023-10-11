@@ -1,5 +1,5 @@
 import pymongo
-from config import settings
+from config import MONGODB_URI, DATABASE_NAME, COLLECTION_NAME
 
 def ensure_database_and_collection(client, db_name, collection_name):
     # Si la base de données n'existe pas, elle sera automatiquement créée lors de la création de la collection
@@ -11,10 +11,6 @@ def ensure_database_and_collection(client, db_name, collection_name):
 
 def store_data_base(json_data):
     # Retrieve MongoDB connection details from environment variables
-    MONGODB_URI = settings.MONGODB_URI
-    DATABASE_NAME = settings.DATABASE_NAME
-    COLLECTION_NAME = settings.COLLECTION_NAME
-
     print(f"MONGODB_URI: {MONGODB_URI}")
     print(f"DATABASE_NAME: {DATABASE_NAME}")
     print(f"COLLECTION_NAME: {COLLECTION_NAME}")
