@@ -1,4 +1,6 @@
-flask
-pymongo
-gunicorn
+fastapi
+motor
 python-dotenv
+uvicorn
+pydantic
+python-multipart

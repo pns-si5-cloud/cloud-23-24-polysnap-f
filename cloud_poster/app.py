@@ -1,9 +1,6 @@
-from flask import Flask
-from controllers import main_routes
+from fastapi import FastAPI
+from controllers import router
 
-app = Flask(__name__)
+app = FastAPI()
 
-app.register_blueprint(main_routes)
-
-if __name__ == "__main__":
-    app.run(port=5000)
+app.include_router(router)
