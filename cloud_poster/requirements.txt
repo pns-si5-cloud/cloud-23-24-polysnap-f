@@ -1,6 +1,8 @@
 fastapi
+jinja2
 motor
 python-dotenv
 uvicorn
 pydantic
 python-multipart
+aiohttp
