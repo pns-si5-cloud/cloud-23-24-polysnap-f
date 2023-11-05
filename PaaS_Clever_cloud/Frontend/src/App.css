@@ -1,0 +1,71 @@
+.inputs {
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+  margin: 5vh auto;
+  height: 3vh;
+}
+
+.send {
+  background-color: green;
+  position: relative;
+  left: 5vw;
+  width: 5vw;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 1.5vh;
+  cursor: pointer;
+}
+
+.conversation {
+  text-align: center;
+}
+
+.conversation-h {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px black solid;
+  height: 70vh;
+  width: 70vw;
+  overflow: scroll;
+}
+
+.message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vh auto;
+  width: 90%;
+}
+
+.msg-time {
+  font-size: 1vh;
+  color: rgba(20, 20, 20);
+  font-weight: bold;
+  position: relative;
+  left: -2vw;
+}
+
+.msg-sender,
+.msg-text {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+.msg-sender > p,
+.msg-text > p {
+  color: blue;
+  padding-left: 1rem;
+}
+
+.read {
+  background-color: lightgreen;
+}
+
+.unread {
+  background-color: lightcoral;
+}
