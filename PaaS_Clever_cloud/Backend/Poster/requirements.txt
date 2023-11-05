@@ -1,0 +1,10 @@
+fastapi
+motor
+python-dotenv
+uvicorn
+pydantic
+python-multipart
+aiohttp
+google-cloud-storage
+google-cloud-pubsub
+dnspython
