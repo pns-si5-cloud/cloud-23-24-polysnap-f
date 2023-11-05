@@ -58,11 +58,15 @@ const ConversationsList = ({
       })
       .then((response) => {
         const newConversation = response.data;
+        console.log("new convo ", newConversation);
         if (!newConversation || !newConversation.participants) {
           throw new Error(
             "New conversation data is incomplete or not structured correctly."
           );
         }
+
+        setRefreshConversations(!refreshConversations);
+
         const updatedParticipants = newConversation.participants.map(
           (participant) => ({
             ...participant,
@@ -79,7 +83,6 @@ const ConversationsList = ({
           ...prevConversations,
           newConversation._id,
         ]);
-
         setShowForm(false);
         setParticipantIDs([]);
         setReadDuration(5);

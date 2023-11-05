@@ -11,7 +11,7 @@ Floriane Paris | Floriane-PARIS
 
 PolySnap est une application de messagerie instantanée permettant aux utilisateurs de communiquer efficacement à travers des messages textuels et des médias visuels. Elle propose des fonctionnalités uniques telles que des messages éphémères qui disparaissent après lecture, et la création de groupes de discussion pour une interaction collaborative. En outre, les utilisateurs peuvent partager leur quotidien via des séquences chronologiques de médias appelées PolyStories, visibles temporairement. Grâce à ces fonctionnalités, PolySnap offre une plateforme interactive et sécurisée pour une communication enrichie et authentique.  
 
-**Pour tester l'application, accédez au [frontend ici](https://app-061c7eb9-4e4d-4bff-a3ba-ac5f184e2f25.cleverapps.io/Sylcantor).** Vous pouvez remplacer `Sylcantor` par n'importe quel autre nom d'utilisateur de votre choix. Note : après la création d'une conversation, il est nécessaire d'actualiser la page (touche F5) pour voir la conversation.  
+**Pour tester l'application, accédez au [frontend ici](https://app-061c7eb9-4e4d-4bff-a3ba-ac5f184e2f25.cleverapps.io/).** Entrez un nom d'utilisateur ( un existant parmis Sylcantor, Chahan, Testeur ..) ou un nouveau nom.
 
 **Attention :** Ne pas connecter deux clients sur le même PC en raison des problèmes de connexion WebSocket. (Voir [Faiblesses](#faiblesses)).
 

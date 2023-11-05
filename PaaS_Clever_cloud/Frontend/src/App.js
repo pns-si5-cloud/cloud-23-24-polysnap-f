@@ -4,12 +4,12 @@ import {
   Routes,
   Route,
   useParams,
+  useNavigate
 } from "react-router-dom";
 import MessageInput from "./components/MessageInput";
 import MessageList from "./components/MessageList";
 import ConversationsList from "./components/ConversationsList";
 import Stories from "./components/stories";
-
 import "./App.css";
 
 function UserPage() {
@@ -47,11 +47,37 @@ function UserPage() {
   );
 }
 
+function EnterUserID() {
+  const [inputUserID, setInputUserID] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/${inputUserID}`); // Redirige vers la route avec le userID
+  };
+
+  return (
+    <div className="enterUserIdForm">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="userID">Enter User ID:</label>
+        <input
+          type="text"
+          id="userID"
+          value={inputUserID}
+          onChange={(e) => setInputUserID(e.target.value)}
+        />
+        <button type="submit">Go</button>
+      </form>
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/" element={<EnterUserID />} />
           <Route path="/:userID" element={<UserPage />} />
         </Routes>
       </div>
@@ -60,3 +86,4 @@ function App() {
 }
 
 export default App;
+
