@@ -1,6 +1,6 @@
-# Backend - PolySnap Post Service
+# Backend - PolySnap Poster Service
 
-Le service backend Post de PolySnap est responsable de la gestion des messages, des conversations et des stories. Il interagit avec la base de données pour stocker et récupérer les informations nécessaires, et communique également avec d'autres services cloud pour certaines fonctionnalités, comme l'upload de fichiers et la publication dans un Pub/Sub. Vous trouverez ci-dessous une explication des routes fournies par ce service et des interactions associées.
+Le service backend Poster de PolySnap est responsable de la gestion des messages, des conversations et des stories. Il interagit avec la base de données pour stocker et récupérer les informations nécessaires, et communique également avec d'autres services cloud pour certaines fonctionnalités, comme l'upload de fichiers et la publication dans un Pub/Sub. Vous trouverez ci-dessous une explication des routes fournies par ce service et des interactions associées.
 
 ## Routes
 
