@@ -1,32 +1,42 @@
-from flask import Blueprint, render_template, request, jsonify
-from services import store_data_base
-from services import send_post_request
+from fastapi import APIRouter, Request, HTTPException, Depends, Form
+from fastapi.templating import Jinja2Templates
 
-main_routes = Blueprint('routes', __name__)
+from dto import Participants, Message
+from services import store_data_base, send_post_request, add_message_to_conversation_db, create_conversation_db
 
-@main_routes.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        message = request.form.get("message")
-        idSender = request.form.get("expediteur")
-        idReceiver = request.form.get("destinataire")
+router = APIRouter()
+templates = Jinja2Templates(directory="templates")
+
+@router.get("/form")
+async def get_form(request: Request):
+    return templates.TemplateResponse("form.html", {"request": request})
+
+@router.post("/form")
+async def post_form(message: str = Form(...), idSender: str = Form(...), idReceiver: str = Form(...)):
+    try:
+        await send_post_request(message, idSender, idReceiver)
         json_data = {"idSender": idSender, "idReceiver": idReceiver, "message": message}
-        print(json_data)
+        id_collection = await store_data_base(json_data)
+        return {"message": "Data stored successfully", "id": str(id_collection)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to store message: {str(e)}")
 
-        # Send the POST request to the NestJS app
-        send_post_request(message, idSender, idReceiver)
+@router.post("/conversations/{conversation_id}/messages")
+async def add_message_to_conversation(conversation_id: str, message: Message):
+    try:
+        await add_message_to_conversation_db(conversation_id, message.user_id, message.text)
+        return {"message": "Data stored successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to store message: {str(e)}")
 
-        id_collection = store_data_base(json_data)
-
-        # return jsonify(json_data)
-
-    return render_template("form.html")
-
-@main_routes.route("/messages", methods=["POST"])
-def store_message():
-    json_data = request.json
-    if not json_data:
-        return jsonify({"error": "Invalid JSON"}), 400
-
-    store_data_base(json_data)
-    return jsonify({"message": "Data stored successfully"}), 201
+@router.post("/conversations")
+async def create_conversation(participants: Participants):
+    if not participants or len(participants.participants) < 2:
+        raise HTTPException(status_code=400, detail="Invalid participants list")
+    try:
+        conversation_id = await create_conversation_db([p.user_id for p in participants.participants])
+        return {"message": "Conversation created successfully", "conversation_id": str(conversation_id)}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create conversation: {str(e)}")
