@@ -2,10 +2,10 @@
 
 ## Membres
 
-Nicolas Guiblin | Sylcantor
-Chahan Movsessian | Cloud84-blip
-Hadil Ayari | HadilAyari00
-Floriane Paris | Floriane-PARIS
+Nicolas Guiblin | Sylcantor  
+Chahan Movsessian | Cloud84-blip  
+Hadil Ayari | HadilAyari00  
+Floriane Paris | Floriane-PARIS  
 
 ## Description du projet
 
