@@ -111,6 +111,7 @@ const MessageInput = (props) => {
         setFormData((prevState) => ({ ...prevState, text: "", url: "" }));
       } else if (isFormSubmitted) {
         console.log("Form submitted successfully.");
+        setFormData((prevState) => ({ ...prevState, text: "", url: "" }));
       } else {
         console.log("Nothing to send.");
       }
