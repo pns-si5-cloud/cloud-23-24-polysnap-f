@@ -83,17 +83,24 @@ class MessageList extends React.Component {
 
   componentDidMount() {
     this.fetchData();
+    this.setupSocket();
+  }
 
+  setupSocket = () => {
     this.socket = io(
-      "wss://app-7b3a3c98-565a-4b75-9e80-683f4e59b229.cleverapps.io"
+      "wss://app-7b3a3c98-565a-4b75-9e80-683f4e59b229.cleverapps.io",
+      {
+        reconnection: true,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: 0,
+        reconnectionDelayMax : 0,
+      }
     );
-
+  
     this.socket.on("connect", () => {
-      console.log("Connected to socket server.");
-      console.log("Joining conversation:", this.props.conversationId);
-      this.socket.emit("joinConversations", {conversation_ids: [this.props.conversationId] });
+      this.joinConversation();
     });
-
+  
     this.socket.on("newMessage", (message) => {
       console.log("New message received:", message);
       const data = JSON.parse(message);
@@ -103,10 +110,20 @@ class MessageList extends React.Component {
         messages: [...prevState.messages, data],
       }));
     });
-
+  
     this.socket.on("disconnect", () => {
       console.log("Disconnected from socket server.");
     });
+  
+    this.socket.on("reconnect", () => {
+      console.log("Reconnected to socket server.");
+      this.joinConversation();
+    });
+  };
+
+  joinConversation = () => {
+    console.log("Joining conversation:", this.props.conversationId);
+    this.socket.emit("joinConversations", {conversation_ids: [this.props.conversationId] });
   }
 
   componentWillUnmount() {
