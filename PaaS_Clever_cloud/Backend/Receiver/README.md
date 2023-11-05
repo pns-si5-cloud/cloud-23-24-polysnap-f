@@ -1,73 +1,42 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Backend - PolySnap Receiver Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Le service backend Receiver de PolySnap est principalement chargé de la réception, du traitement des messages et de l'interaction avec la base de données pour la récupération des informations. Il joue également un rôle crucial dans la gestion des communications en temps réel avec les utilisateurs via WebSocket. Voici une description détaillée des routes, des responsabilités et des interactions avec d'autres services et systèmes cloud.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Routes
 
-## Description
+Les routes suivantes sont exposées par ce service :
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **POST `/server/message`** : Reçoit un message et le traite en conséquence.
+- **GET `/server/history`** : Récupère l'historique des conversations.
+- **GET `/server/conversation/:id/history`** : Récupère l'historique d'une conversation spécifique.
+- **GET `/server/conversation/:id`** : Récupère les détails d'une conversation spécifique.
+- **GET `/server/users/:userId/stories/viewable`** : Récupère les stories visibles par un utilisateur spécifique.
 
-## Installation
+## Documentation Swagger
 
-```bash
-$ yarn install
-```
+La documentation Swagger pour ces routes est accessible à [ce lien](https://app-7b3a3c98-565a-4b75-9e80-683f4e59b229.cleverapps.io/api).
 
-## Running the app
+## Responsabilités du Service
 
-```bash
-# development
-$ yarn run start
+- **Réception des Messages** :
+  - Le service est abonné au topic Pub/Sub sur Google Cloud et reçoit des messages qui sont ensuite traités et envoyés aux utilisateurs concernés via WebSocket.
+  
+- **Gestion des Conversations et Historique** :
+  - Le service fournit des endpoints pour récupérer les détails des conversations ainsi que leur historique.
+  
+- **Gestion des Stories** :
+  - Il fournit également un endpoint pour récupérer les stories visibles par un utilisateur spécifique.
 
-# watch mode
-$ yarn run start:dev
+- **Interaction avec WebSocket** :
+  - Le service utilise WebSocket pour transmettre les messages en temps réel aux utilisateurs concernés.
 
-# production mode
-$ yarn run start:prod
-```
+## Interaction avec d'autres Services et Cloud
 
-## Test
+- **Database** : 
+  - Toutes les lectures de la base de données sont gérées par ce service backend.
+  
+- **Google Cloud Pub/Sub** :
+  - Abonnement à un topic pour recevoir des messages qui seront ensuite transmis aux utilisateurs via WebSocket.
 
-```bash
-# unit tests
-$ yarn run test
+Pour plus de détails sur la configuration et les protocoles de déploiement, veuillez vous référer aux sections correspondantes de la documentation principale.
 
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
